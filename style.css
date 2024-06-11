@@ -1,0 +1,16 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+input, button {
+    margin: 5px;
+    padding: 5px;
+}
+
+#tela-boas-vindas {
+    text-align: center;
+}
+
+#tela-jogo, #tela-resultado {
+    text-align: center;
+}
