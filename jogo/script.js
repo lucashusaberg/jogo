@@ -34,24 +34,32 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    
+    // Função para atualizar o leaderboard com a opção de excluir
     function atualizarLeaderboard() {
         rankingTableBody.innerHTML = '';
-        ranking.forEach(item => {
+        ranking.forEach((item, index) => {
             const row = document.createElement('tr');
-            row.innerHTML = `<td>${item.nome}</td><td>${item.tentativas}</td>`;
+            row.innerHTML = `<td>${item.nome}</td><td>${item.tentativas}</td><td><button class="btn-excluir" data-index="${index}">Excluir</button></td>`;
             rankingTableBody.appendChild(row);
+        });
+
+        // Adiciona evento de clique para os botões de excluir
+        document.querySelectorAll('.btn-excluir').forEach(button => {
+            button.addEventListener('click', function() {
+                const index = this.getAttribute('data-index');
+                ranking.splice(index, 1);
+                atualizarLeaderboard();
+            });
         });
     }
 
-   
+    // Função para adicionar um novo item ao ranking
     function adicionarAoRanking(nome, tentativas) {
         ranking.push({ nome, tentativas });
         ranking.sort((a, b) => a.tentativas - b.tentativas);
         atualizarLeaderboard();
     }
 
-   
     formNome.addEventListener('submit', function(event) {
         event.preventDefault();
         if (inputNome.value.trim() !== '') {
@@ -96,3 +104,4 @@ document.addEventListener("DOMContentLoaded", function() {
         feedback.textContent = '';
     });
 });
+
